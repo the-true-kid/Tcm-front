@@ -6,6 +6,7 @@ import DiagnosisForm from './components/DiagnosisForm';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import LandingPage from './pages/LandingPage';
+import ReportPage from './pages/ReportPage'; // Import ReportPage
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -28,6 +29,14 @@ function App() {
           element={
             <ProtectedRoute>
               <DiagnosisForm />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/report" 
+          element={
+            <ProtectedRoute>
+              <ReportPage />
             </ProtectedRoute>
           } 
         />
