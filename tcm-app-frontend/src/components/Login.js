@@ -6,16 +6,21 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/auth/login', { email, password });
-      localStorage.setItem('token', response.data.token);
-      navigate('/dashboard');
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/auth/login`,
+        { email, password }
+      );
+      localStorage.setItem('token', response.data.token); // Save token
+      navigate('/landing'); // Redirect to Landing Page
     } catch (error) {
       console.error('Login failed:', error.message);
+      setError('Invalid email or password. Please try again.');
     }
   };
 
@@ -26,6 +31,7 @@ const Login = () => {
         className="w-full max-w-sm bg-white p-8 rounded-lg shadow-lg"
       >
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Login</h2>
+        {error && <p className="text-red-500 mb-4">{error}</p>}
         <div className="mb-4">
           <input
             type="email"

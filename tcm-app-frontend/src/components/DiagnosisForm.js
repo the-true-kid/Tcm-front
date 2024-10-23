@@ -27,38 +27,113 @@ const DiagnosisForm = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gradient-to-br from-yellow-100 via-orange-200 to-pink-200">
+    <div className="flex items-center justify-center h-screen bg-gradient-to-br from-pink-100 via-red-200 to-orange-300">
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Diagnosis Form</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">TCM Diagnosis Form</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-4">
+
+          {/* Basic Questions */}
           <div>
             <label className="block text-gray-700">How do you feel overall?</label>
-            <input
-              type="text"
-              name="feeling"
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400"
+            <textarea 
+              name="overallFeeling" 
+              onChange={handleChange} 
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400" 
             />
           </div>
+
           <div>
-            <label className="block text-gray-700">How is your energy level?</label>
-            <input
-              type="text"
-              name="energy"
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400"
+            <label className="block text-gray-700">How would you describe your energy level?</label>
+            <input 
+              type="text" 
+              name="energyLevel" 
+              onChange={handleChange} 
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400" 
             />
           </div>
+
+          {/* TCM-Specific Questions */}
           <div>
-            <label className="block text-gray-700">Are you feeling hot or cold?</label>
-            <input
-              type="text"
-              name="temperature"
-              onChange={handleChange}
+            <label className="block text-gray-700">Do you experience cold hands or feet?</label>
+            <select 
+              name="coldHandsFeet" 
+              onChange={handleChange} 
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400"
+            >
+              <option value="">Select</option>
+              <option value="often">Often</option>
+              <option value="sometimes">Sometimes</option>
+              <option value="never">Never</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-gray-700">Do you experience night sweats?</label>
+            <select 
+              name="nightSweats" 
+              onChange={handleChange} 
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400"
+            >
+              <option value="">Select</option>
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-gray-700">How would you describe your appetite?</label>
+            <select 
+              name="appetite" 
+              onChange={handleChange} 
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400"
+            >
+              <option value="">Select</option>
+              <option value="poor">Poor</option>
+              <option value="normal">Normal</option>
+              <option value="excessive">Excessive</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-gray-700">Do you have trouble falling or staying asleep?</label>
+            <input 
+              type="text" 
+              name="sleepIssues" 
+              onChange={handleChange} 
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400" 
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700">Describe any pain or discomfort you experience (e.g., headaches, joint pain).</label>
+            <textarea 
+              name="painDiscomfort" 
+              onChange={handleChange} 
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
           </div>
+
+          <div>
+            <label className="block text-gray-700">Do you experience any emotional imbalances (e.g., anxiety, depression)?</label>
+            <textarea 
+              name="emotionalImbalance" 
+              onChange={handleChange} 
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400" 
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700">How frequently do you have bowel movements?</label>
+            <input 
+              type="text" 
+              name="bowelFrequency" 
+              onChange={handleChange} 
+              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400" 
+            />
+          </div>
+
+          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition duration-300"
