@@ -29,6 +29,10 @@ const ReportPage = () => {
     fetchReports(); // Fetch reports on component mount
   }, []);
 
+  const handleReportClick = (report) => {
+    navigate('/report/details', { state: { report: report.report } }); // Navigate to the detailed report page
+  };
+
   const handleBackToLanding = () => {
     navigate('/landing'); // Navigate back to landing page
   };
@@ -49,11 +53,12 @@ const ReportPage = () => {
             {reports.map((report, index) => (
               <li
                 key={index}
-                className="p-4 border rounded-md bg-gray-50 shadow-sm"
+                className="p-4 border rounded-md bg-gray-50 shadow-sm cursor-pointer hover:bg-gray-100"
+                onClick={() => handleReportClick(report)}
               >
                 <h3 className="font-semibold">Report #{index + 1}</h3>
-                <p className="mt-2 whitespace-pre-line">
-                  {report.report}
+                <p className="text-sm text-gray-600 mt-2">
+                  Click to view full report
                 </p>
               </li>
             ))}
