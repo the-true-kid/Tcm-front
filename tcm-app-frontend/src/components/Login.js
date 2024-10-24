@@ -1,4 +1,3 @@
-// src/components/Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -16,13 +15,24 @@ const Login = () => {
         `${process.env.REACT_APP_API_URL}/api/auth/login`,
         { email, password }
       );
-      localStorage.setItem('token', response.data.token); // Save token
-      navigate('/landing'); // Redirect to Landing Page
+  
+      console.log('Login response:', response.data); // Log the response
+  
+      const { token } = response.data;
+  
+      if (token) {
+        localStorage.setItem('token', token); // Save token to localStorage
+        console.log('Token saved:', localStorage.getItem('token')); // Verify token storage
+        navigate('/landing'); // Redirect on success
+      } else {
+        setError('No token received. Please try again.');
+      }
     } catch (error) {
       console.error('Login failed:', error.message);
       setError('Invalid email or password. Please try again.');
     }
   };
+  
 
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-r from-green-200 via-blue-200 to-purple-300">

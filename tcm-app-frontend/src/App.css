@@ -58,6 +58,9 @@ button:hover {
 nav {
   background-color: #333;
   padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 nav a {
@@ -65,8 +68,24 @@ nav a {
   margin-right: 10px;
   text-decoration: none;
   font-weight: bold;
+  transition: color 0.2s ease;
 }
 
 nav a:hover {
   text-decoration: underline;
+  color: #ddd;
+}
+
+nav button {
+  background-color: #ef4444;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+nav button:hover {
+  background-color: #dc2626;
 }

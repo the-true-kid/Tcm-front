@@ -1,0 +1,214 @@
+[
+    {
+      "section": "Overall Feeling",
+      "questions": [
+        {
+          "label": "How do you feel overall?",
+          "name": "overallFeeling",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "section": "Chronic Illness History",
+      "questions": [
+        {
+          "label": "Have you been diagnosed with any chronic illnesses?",
+          "name": "chronicIllness",
+          "type": "text"
+        },
+        {
+          "label": "How long have you been managing these conditions?",
+          "name": "chronicIllnessDuration",
+          "type": "text"
+        },
+        {
+          "label": "How are your treatments affecting you?",
+          "name": "chronicIllnessEffects",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "section": "Mental Health History",
+      "questions": [
+        {
+          "label": "Have you experienced significant mental health challenges?",
+          "name": "mentalHealthChallenges",
+          "type": "text"
+        },
+        {
+          "label": "Have you received therapy or treatment for mental health issues?",
+          "name": "mentalHealthTreatment",
+          "type": "textarea"
+        },
+        {
+          "label": "Do specific triggers affect your well-being?",
+          "name": "mentalHealthTriggers",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "section": "Sleep Patterns",
+      "questions": [
+        {
+          "label": "Do you have trouble sleeping?",
+          "name": "sleepIssues",
+          "type": "text"
+        },
+        {
+          "label": "How many hours do you sleep per night?",
+          "name": "sleepHours",
+          "type": "number"
+        },
+        {
+          "label": "Do you wake up feeling rested?",
+          "name": "wakeRested",
+          "type": "select",
+          "options": ["Yes", "No"]
+        }
+      ]
+    },
+    {
+      "section": "Appetite and Digestion",
+      "questions": [
+        {
+          "label": "How is your appetite?",
+          "name": "appetite",
+          "type": "text"
+        },
+        {
+          "label": "Do you have any cravings?",
+          "name": "cravings",
+          "type": "textarea"
+        },
+        {
+          "label": "Do you experience bloating or heartburn?",
+          "name": "digestiveIssues",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "section": "Bowel Movements and Urination",
+      "questions": [
+        {
+          "label": "How often do you have a bowel movement?",
+          "name": "bowelFrequency",
+          "type": "text"
+        },
+        {
+          "label": "Is your stool loose, dry, or hard?",
+          "name": "stoolConsistency",
+          "type": "text"
+        },
+        {
+          "label": "Do you experience frequent or painful urination?",
+          "name": "urinationIssues",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "section": "Energy Levels and Fatigue",
+      "questions": [
+        {
+          "label": "How is your energy throughout the day?",
+          "name": "energyLevels",
+          "type": "text"
+        },
+        {
+          "label": "Do you experience fluctuations in energy?",
+          "name": "energyFluctuations",
+          "type": "text"
+        },
+        {
+          "label": "Do you feel more tired in the morning or afternoon?",
+          "name": "fatigueTime",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "section": "Pain and Physical Discomfort",
+      "questions": [
+        {
+          "label": "Do you experience any pain or discomfort?",
+          "name": "painDescription",
+          "type": "textarea"
+        },
+        {
+          "label": "Where is the pain located?",
+          "name": "painLocation",
+          "type": "text"
+        },
+        {
+          "label": "Is the pain sharp, dull, or throbbing?",
+          "name": "painType",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "section": "Temperature Sensitivity",
+      "questions": [
+        {
+          "label": "Do you feel cold easily or experience night sweats?",
+          "name": "coldSensitivity",
+          "type": "text"
+        },
+        {
+          "label": "Do your hands or feet get cold often?",
+          "name": "coldHandsFeet",
+          "type": "text"
+        },
+        {
+          "label": "Do you feel warmer or colder than others around you?",
+          "name": "temperatureComparison",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "section": "Lifestyle and Habits",
+      "questions": [
+        {
+          "label": "How often do you exercise or move your body?",
+          "name": "exerciseFrequency",
+          "type": "text"
+        },
+        {
+          "label": "Do you smoke, drink alcohol, or use any substances?",
+          "name": "substanceUse",
+          "type": "textarea"
+        },
+        {
+          "label": "What does a typical day look like for you?",
+          "name": "dailyRoutine",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "section": "Environmental and Seasonal Influences",
+      "questions": [
+        {
+          "label": "Do your symptoms change with the seasons?",
+          "name": "seasonalSymptoms",
+          "type": "text"
+        },
+        {
+          "label": "Are you sensitive to weather changes, such as wind or humidity?",
+          "name": "weatherSensitivity",
+          "type": "text"
+        },
+        {
+          "label": "Do you feel better or worse in specific environments (e.g., humid vs. dry)?",
+          "name": "environmentPreference",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+  

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import questions from '../data/tcmQuestions.json'; // Import JSON data
 
 const DiagnosisForm = () => {
   const [responses, setResponses] = useState({});
@@ -26,12 +27,60 @@ const DiagnosisForm = () => {
 
       console.log('Diagnosis submitted successfully:', response.data);
 
-      // Redirect to the report page with the report data
       navigate('/report', { state: { report: response.data.diagnosis_report } });
     } catch (error) {
       setError('Failed to submit diagnosis. Please try again.');
       console.error('Error submitting diagnosis:', error.message);
     }
+  };
+
+  const renderField = (question) => {
+    const { label, name, type, options } = question;
+
+    if (type === 'textarea') {
+      return (
+        <div key={name} className="mb-4">
+          <label className="block text-gray-700">{label}</label>
+          <textarea
+            name={name}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-orange-400"
+          />
+        </div>
+      );
+    }
+
+    if (type === 'select') {
+      return (
+        <div key={name} className="mb-4">
+          <label className="block text-gray-700">{label}</label>
+          <select
+            name={name}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-md"
+          >
+            <option value="">Select an option</option>
+            {options.map((option, index) => (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
+      );
+    }
+
+    return (
+      <div key={name} className="mb-4">
+        <label className="block text-gray-700">{label}</label>
+        <input
+          type={type}
+          name={name}
+          onChange={handleChange}
+          className="w-full px-4 py-2 border rounded-md"
+        />
+      </div>
+    );
   };
 
   return (
@@ -44,15 +93,14 @@ const DiagnosisForm = () => {
         {error && <p className="text-red-500 mb-4">{error}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-8">
-          {/* Form Fields */}
-          <div>
-            <label className="block text-gray-700">How do you feel overall?</label>
-            <textarea
-              name="overallFeeling"
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-orange-400"
-            />
-          </div>
+          {questions.map((section) => (
+            <div key={section.section}>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">
+                {section.section}
+              </h3>
+              {section.questions.map((question) => renderField(question))}
+            </div>
+          ))}
 
           <button
             type="submit"

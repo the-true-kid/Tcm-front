@@ -1,4 +1,3 @@
-// src/pages/ReportPage.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +10,16 @@ const ReportPage = () => {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const token = localStorage.getItem('token'); // Retrieve token
+        console.log('Fetching reports...');
+
+        const token = localStorage.getItem('token');
+        if (!token) {
+          console.error('No token found in localStorage.');
+          setError('Authorization token is missing. Please log in.');
+          return;
+        }
+
+        console.log('Using token:', token);
 
         const response = await axios.get(
           `${process.env.REACT_APP_API_URL}/api/diagnosis/user/reports`,
@@ -19,22 +27,57 @@ const ReportPage = () => {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-        setReports(response.data); // Set fetched reports
+
+        console.log('Response:', response.data);
+
+        // Sort reports chronologically (oldest first)
+        const sortedReports = response.data.sort(
+          (a, b) => new Date(a.created_at) - new Date(b.created_at)
+        );
+
+        setReports(sortedReports);
       } catch (error) {
-        console.error('Error fetching reports:', error.message);
-        setError('Failed to load reports. Please try again.');
+        console.error('Error fetching reports:', error);
+        if (error.response) {
+          if (error.response.status === 401) {
+            setError('Unauthorized access. Please log in again.');
+            localStorage.removeItem('token');
+            navigate('/login');
+          } else if (error.response.status === 404) {
+            setError('No reports found for your account.');
+          } else {
+            setError('Failed to load reports. Please try again later.');
+          }
+        } else {
+          setError('Network error. Check your internet connection.');
+        }
       }
     };
 
     fetchReports(); // Fetch reports on component mount
-  }, []);
+  }, [navigate]);
 
-  const handleReportClick = (report) => {
-    navigate('/report/details', { state: { report: report.report } }); // Navigate to the detailed report page
+  const handleReportClick = (report, index) => {
+    const parsedReport = JSON.parse(report.diagnosis_report);
+
+    console.log('Navigating with report:', parsedReport); // Debugging
+
+    navigate('/report/details', {
+      state: {
+        report: parsedReport,
+        reportNumber: index + 1, // Report numbering starts from 1
+        date: formatDate(report.created_at),
+      },
+    });
+  };
+
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
   const handleBackToLanding = () => {
-    navigate('/landing'); // Navigate back to landing page
+    navigate('/landing');
   };
 
   return (
@@ -46,22 +89,27 @@ const ReportPage = () => {
 
         {error && <p className="text-red-500 mb-4">{error}</p>}
 
-        {reports.length === 0 ? (
+        {reports.length === 0 && !error ? (
           <p className="text-gray-600">No reports available.</p>
         ) : (
           <ul className="space-y-4">
-            {reports.map((report, index) => (
-              <li
-                key={index}
-                className="p-4 border rounded-md bg-gray-50 shadow-sm cursor-pointer hover:bg-gray-100"
-                onClick={() => handleReportClick(report)}
-              >
-                <h3 className="font-semibold">Report #{index + 1}</h3>
-                <p className="text-sm text-gray-600 mt-2">
-                  Click to view full report
-                </p>
-              </li>
-            ))}
+            {reports
+              .slice() // Create a copy to avoid mutating state
+              .reverse() // Display newest report first
+              .map((report, index) => (
+                <li
+                  key={report.id}
+                  className="p-4 border rounded-md bg-gray-50 shadow-sm cursor-pointer hover:bg-gray-100"
+                  onClick={() => handleReportClick(report, reports.length - index - 1)}
+                >
+                  <h3 className="font-semibold">
+                    {formatDate(report.created_at)} - Report #{reports.length - index}
+                  </h3>
+                  <p className="text-sm text-gray-600 mt-2">
+                    Click to view full report
+                  </p>
+                </li>
+              ))}
           </ul>
         )}
 
