@@ -15,6 +15,8 @@ const SessionList = () => {
           `${process.env.REACT_APP_API_URL}/api/diagnosis/user/reports`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
+
+        console.log('Response data:', response.data); // Debugging log
         setSessions(response.data);
       } catch (error) {
         setError('Failed to fetch sessions. Please try again.');
@@ -26,9 +28,9 @@ const SessionList = () => {
   }, []);
 
   const handleSessionClick = (sessionId) => {
-    navigate('/session-details', { state: { sessionId } });
+    navigate('/session-details', { state: { sessionId } }); // Corrected this line
   };
-
+  
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-100 to-blue-300">
       <div className="w-full max-w-2xl p-6 bg-white rounded-lg shadow-lg">
