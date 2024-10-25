@@ -5,64 +5,74 @@ import DiagnosisForm from './components/DiagnosisForm';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import LandingPage from './pages/LandingPage';
-import ReportPage from './pages/ReportPage';
-import SingleReportPage from './pages/SingleReportPage';
+import ReportForm from './components/ReportForm'; 
+import SessionList from './pages/SessionList'; // Import new pages
+import SessionDetails from './pages/SessionDetails'; // Import new pages
 import ProtectedRoute from './components/ProtectedRoute';
-import NavBar from './components/NavBar'; // Import NavBar
-import './App.css'; // Import the global CSS file
-
+import NavBar from './components/NavBar'; 
+import './App.css'; 
 
 function App() {
   return (
     <Router>
-      <div>
-        <NavBar /> {/* NavBar is added here */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route
-            path="/landing"
-            element={
-              <ProtectedRoute>
-                <LandingPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/diagnosis"
-            element={
-              <ProtectedRoute>
-                <DiagnosisForm />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/report"
-            element={
-              <ProtectedRoute>
-                <ReportPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/report/details"
-            element={
-              <ProtectedRoute>
-                <SingleReportPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
+      <div className="app-container">
+        <NavBar />
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/landing"
+              element={
+                <ProtectedRoute>
+                  <LandingPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/diagnosis"
+              element={
+                <ProtectedRoute>
+                  <DiagnosisForm />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/report"
+              element={
+                <ProtectedRoute>
+                  <ReportForm />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/sessions"
+              element={
+                <ProtectedRoute>
+                  <SessionList />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/session-details"
+              element={
+                <ProtectedRoute>
+                  <SessionDetails />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </div>
       </div>
     </Router>
   );

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const [name, setName] = useState('');  // State for the user's name
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null); // Error handling
@@ -13,6 +14,7 @@ const Register = () => {
     e.preventDefault();
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/register`, {
+        name,      // Send name in the request
         email,
         password,
       });
@@ -30,6 +32,15 @@ const Register = () => {
       >
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Register</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
+        <div className="mb-4">
+          <input
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
+        </div>
         <div className="mb-4">
           <input
             type="email"

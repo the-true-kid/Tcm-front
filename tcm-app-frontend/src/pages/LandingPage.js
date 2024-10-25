@@ -14,8 +14,8 @@ const LandingPage = () => {
     navigate('/diagnosis'); // Navigate to Diagnosis Form
   };
 
-  const goToReport = () => {
-    navigate('/report'); // Navigate to Report Page
+  const goToSessions = () => {
+    navigate('/sessions'); // Navigate to Report Page
   };
 
   return (
@@ -31,10 +31,10 @@ const LandingPage = () => {
             Start Diagnosis
           </button>
           <button
-            onClick={goToReport}
+            onClick={goToSessions}
             className="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300"
           >
-            View Report
+            View Sessions
           </button>
           <button
             onClick={handleLogout}
