@@ -25,18 +25,10 @@ const DiagnosisForm = () => {
 
       const diagnosis = diagnosisResponse.data;
 
-      const chatResponse = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/chats/tcm-diagnosis`,
-        { diagnosisId: diagnosis.id },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      const chat = chatResponse.data.chat;
-
+      // Navigate to Report component with the diagnosis ID
       navigate('/report', {
         state: {
-          report: diagnosis.diagnosis_report,
-          tcmResponse: chat.message_content,
+          diagnosisId: diagnosis.id, // Pass the diagnosis ID
         },
       });
     } catch (error) {

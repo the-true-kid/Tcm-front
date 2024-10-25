@@ -25,8 +25,8 @@ const SessionList = () => {
     fetchSessions();
   }, []);
 
-  const handleSessionClick = (session) => {
-    navigate('/session-details', { state: { session } });
+  const handleSessionClick = (sessionId) => {
+    navigate('/session-details', { state: { sessionId } });
   };
 
   return (
@@ -47,7 +47,7 @@ const SessionList = () => {
                 <li
                   key={session.id}
                   className="p-4 border rounded-md bg-gray-50 shadow-sm cursor-pointer hover:bg-gray-100"
-                  onClick={() => handleSessionClick(session)}
+                  onClick={() => handleSessionClick(session.id)} // Pass session ID
                 >
                   <h3 className="font-semibold">
                     Session #{index + 1} - {new Date(session.created_at).toLocaleString()}
